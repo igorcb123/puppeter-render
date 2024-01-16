@@ -55,7 +55,16 @@ const scrapeLogic = async (res) => {
     console.log(`We extracted ${repos.length} repositories.`);
     console.dir(repos);
     // Print the full title
-    const logStatement = `We extracted ${repos.length} repositories🚀.  -->> `+repos[0].description;
+    const logStatement = {
+      message: `We extracted ${repos.length} repositories🚀.`,
+      repositories: repos.map(repo => {
+        return {
+          name: repo.name,
+          description: repo.description,
+          // Otros campos del repositorio que desees incluir
+        };
+      })
+    }; 
     console.log(logStatement);
     res.send(logStatement);
   } catch (e) {
